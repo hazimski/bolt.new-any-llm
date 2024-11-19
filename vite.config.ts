@@ -9,6 +9,7 @@ export default defineConfig((config) => {
   return {
     build: {
       target: 'esnext',
+      outDir: 'build'
     },
     plugins: [
       nodePolyfills({
