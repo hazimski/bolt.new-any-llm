@@ -4,14 +4,16 @@ import { defineConfig, type ViteDevServer } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { optimizeCssModules } from 'vite-plugin-optimize-css-modules';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { netlifyPlugin } from "@netlify/remix-adapter/plugin";
 
 export default defineConfig((config) => {
   return {
     build: {
       target: 'esnext',
-      outDir: 'dist'
+      // outDir: 'dist'
     },
     plugins: [
+      netlifyPlugin(),
       nodePolyfills({
         include: ['path', 'buffer'],
       }),
