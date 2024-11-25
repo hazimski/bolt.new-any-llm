@@ -4,6 +4,7 @@ import { defineConfig, type ViteDevServer } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { optimizeCssModules } from 'vite-plugin-optimize-css-modules';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { netlifyPlugin } from "@netlify/remix-edge-adapter/plugin";
 
 export default defineConfig((config) => {
   return {
@@ -12,11 +13,13 @@ export default defineConfig((config) => {
       // outDir: 'dist'
     },
     plugins: [
+      netlifyPlugin(),
       nodePolyfills({
         include: ['path', 'buffer'],
       }),
       config.mode !== 'test' && remixCloudflareDevProxy(),
       remixVitePlugin({
+        serverBuildFile: "server.js",
         future: {
           v3_fetcherPersist: true,
           v3_relativeSplatPath: true,
